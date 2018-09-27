@@ -12,6 +12,8 @@ library(tidyverse)
 library(ggridges)
 ```
 
+## Load data
+
 ```{r data_import, cache = TRUE}
 library(rnoaa)
 
@@ -29,4 +31,93 @@ weather_df =
   select(name, id, everything())
 weather_df
 ```
+
+## Start a plot
+
+Blank plot
+
+```{r}
+ggplot(weather_df, aes(x = tmin, y = tmax))
+```
+
+Scatterplot
+
+```{r}
+ggplot(weather_df, aes(x = tmin, y = tmax)) + 
+  geom_point()
+```
+
+```{r}
+weather_df %>% 
+  filter(name == "CentralPark_NY") %>% 
+  ggplot(aes(x = tmin, y = tmax)) + 
+  geom_point()
+```
+
+Naming plots:
+
+```{r}
+weather_sp = 
+  ggplot(weather_df, aes(x = tmin, y = tmax)) + 
+  geom_point()
+```
+
+## More plot options
+
+Add an aesthetic
+
+```{r}
+ggplot(weather_df, aes(x = tmin, y = tmax)) + 
+  geom_point(aes(color = name))
+```
+
+Add a line through the middle of plot
+
+```{r}
+ggplot(weather_df, aes(x = tmin, y = tmax)) + 
+  geom_point(aes(color = name)) + 
+  geom_smooth(se = FALSE)
+```
+
+Change point transparency:
+
+```{r}
+ggplot(weather_df, aes(x = tmin, y = tmax)) + 
+  geom_point(aes(color = name), alpha = 0.4) + 
+  geom_smooth(se = FALSE)
+```
+
+Apply aesthetic mapping for color globally:
+
+```{r}
+ggplot(weather_df, aes(x = tmin, y = tmax, color = name)) + 
+  geom_point(alpha = 0.4) + 
+  geom_smooth(se = FALSE)
+```
+
+Facetting:
+
+```{r}
+ggplot(weather_df, aes(x = tmin, y = tmax, color = name)) + 
+  geom_point(alpha = 0.4) + 
+  geom_smooth(se = FALSE) + 
+  facet_grid( ~ name)
+```
+
+A more interesting plot:
+
+```{r}
+ggplot(weather_df, aes(x = date, y = tmax, color = name)) + 
+  geom_line()
+```
+
+
+```{r}
+ggplot(weather_df, aes(x = date, y = tmax, color = name, size = prcp)) + 
+  geom_point() + 
+  geom_smooth(se = FALSE) + 
+  facet_grid ( ~ name)
+```
+
+
 
