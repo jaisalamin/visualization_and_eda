@@ -1,0 +1,14 @@
+---
+title: "visualization_ggplot2"
+author: "Jaisal Amin"
+date: "9/27/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(ggridges)
+```
+
