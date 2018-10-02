@@ -157,5 +157,22 @@ ggplot(weather_df, aes(x = tmax, y = name)) +
   geom_density_ridges()
 ```
 
+## Last example
+
+Making multiple plots:
+
+```{r}
+ggplot(weather_df, aes(y = prcp, x = name)) +
+  geom_boxplot()
+```
+
+Not so great...
+
+```{r}
+weather_df %>% 
+  filter(prcp < 50) %>% 
+  ggplot(weather_df, aes(x = prcp, fill = name)) +
+  geom_density(alpha = .5)
+```
 
 
